@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="post-main">
+    {% for post in posts %}
+        <a href="{{ url_for('posts.current_post', post_id=post.id) }}" style="text-decoration: none;">
+            <div class="post-main-div">
+                <span class="span-profile-pic">
+                    <img src="{{ url_for('static' ,filename='images/' + post.author.image_file) }}" alt="{{ post.author.username }}" class="profile-pic">
+                </span>
+                <div class="span-flex">
+                    <span class="user-name">
+                        {{ post.author.username }}
+                    </span>
+                    <span class="date-posted">
+                        {{ post.date_posted.strftime('%b %d, %Y') }}
+                    </span>
+                    <p class="post-content">
+                        {{ post.content }}
+                    </p>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+
+{% endblock %}

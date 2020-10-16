@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="login-form">
+    <div class="login-form-div">
+        <h2>Sign Up</h2>
+        
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+        
+            {{ form.username.label() }} <br>
+            {{ form.username(class="form-input", placeholder='Username') }} <br>
+            <div class="form-errors">
+                {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            {{ form.email.label() }} <br>
+            {{ form.email(class="form-input", placeholder='Email') }} <br>
+            <div class="form-errors">
+                {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        
+            {{ form.password.label() }} <br>
+            {{ form.password(class="form-input", placeholder='Password') }} <br>
+            <div class="form-errors">
+                {% if form.password.errors %}
+                    {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            {{ form.confirm_password.label() }} <br>
+            {{ form.confirm_password(class="form-input", placeholder="Confirm Password") }} <br>
+            <div class="form-errors">
+                {% if form.confirm_password.errors %}
+                    {% for error in form.confirm_password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        
+            {{ form.submit(class="submit-btn") }}
+        </form>
+        <div class="account">
+            Already have an account? <br>
+            <a href="{{ url_for('users.login') }}">Login</a>
+        </div> 
+    </div>
+</div>
+{% endblock %}

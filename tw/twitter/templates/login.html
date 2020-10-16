@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="login-form">
+    <div class="login-form-div">
+        <h2>Login</h2>
+        <div class="flash-msg">
+            {% with messages = get_flashed_messages() %}
+                {% for message in messages %}
+                    <span>
+                        {{ message }}
+                    </span>
+                {% endfor %}
+            {% endwith %}
+        </div>
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+        
+            {{ form.email.label() }} <br>
+            {{ form.email(class="form-input", placeholder='Email') }} <br>
+            <div class="form-errors">
+                {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        
+            {{ form.password.label() }} <br>
+            {{ form.password(class="form-input", placeholder='Password') }} <br>
+            <div class="form-errors">
+                {% if form.password.errors %}
+                    {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        
+            {{ form.submit(class="submit-btn") }}
+        </form>
+        <div class="account">
+            Do not have an account? <br>
+            <a href="{{ url_for('users.register') }}">Sign Up</a>
+        </div> 
+    </div>
+</div>
+{% endblock %}

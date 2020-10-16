@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if current_user.is_authenticated %}
+    <div class="login-form">
+        <div class="login-form-div">
+            <span>
+                <img class="profile-pic profile-pic-main" src="{{ url_for('static', filename='images/'+current_user.image_file) }}" alt="">
+            </span>
+            <div class="user-name-h1">
+                <h1>{{ current_user.username }}</h1>
+                <h3>{{ current_user.email }}</h3>
+            </div>
+            <h2>Update Profile</h2>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+            
+                {{ form.email.label() }} <br>
+                {{ form.email(class="form-input", placeholder='Email') }} <br>
+                <div class="form-errors">
+                    {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            
+                {{ form.username.label() }} <br>
+                {{ form.username(class="form-input", placeholder='Username') }} <br>
+                <div class="form-errors">
+                    {% if form.username.errors %}
+                        {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                {{ form.picture(class="form-input file-input") }} <br>
+                <div class="form-errors">
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            
+                {{ form.submit(class="submit-btn") }}
+            </form>
+        </div>
+    </div>
+{% endif %}
+
+<div class="post-main">
+    {% for post in posts %}
+        <a href="{{ url_for('posts.current_post', post_id=post.id) }}" style="text-decoration: none;">
+            <div class="post-main-div">
+                <span class="span-profile-pic">
+                    <img src="{{ url_for('static' ,filename='images/' + post.author.image_file) }}" alt="{{ post.author.username }}" class="profile-pic">
+                </span>
+                <div class="span-flex">
+                    <span class="user-name">
+                        {{ post.author.username }}
+                    </span>
+                    <span class="date-posted">
+                        {{ post.date_posted.strftime('%b %d, %Y') }}
+                    </span>
+                    <p class="post-content">
+                        {{ post.content }}
+                    </p>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+
+{% endblock %}

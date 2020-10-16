@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>Twitter</title>
+    {% endif %}
+</head>
+<body>
+    <header>
+        <ul class="nav">
+          <li class="main-title">Twitter</li>
+          <li class="three-lines-main">
+            <div class="three-lines" onclick="myFunc()">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </li>
+          <div class="inner-links" id="inner-link">
+            <li><a href="{{ url_for('main.home') }}">Home</a></li>
+            <li><a href="{{ url_for('main.about') }}">About</a></li>
+            {% if current_user.is_authenticated %}
+            <li class="right"><a href="{{ url_for('users.logout') }}">Logout</a></li>
+            <li class="right"><a href="{{ url_for('posts.post') }}">Post</a></li>
+              <li class="right"><a href="{{ url_for('users.profile', username=current_user.username) }}">Profile</a></li>
+            {% else %}
+              <li class="right"><a href="{{ url_for('users.login') }}">Login</a></li>
+              <li class="right"><a href="{{ url_for('users.register') }}">Register</a></li>
+            {% endif %}
+          </div>
+        </ul>
+      </header>
+    <div class="main">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script>
+        function myFunc() {
+            let x = document.getElementById('inner-link');
+            if(x.className === 'inner-links'){
+                x.className += ' responsive';
+            }else{
+                x.className = 'inner-links';
+            }
+        }
+    </script>
+
+</body>
+</html>

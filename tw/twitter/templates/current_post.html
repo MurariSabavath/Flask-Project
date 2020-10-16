@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="post-main-div login-form" >
+    <div style="padding: 2%;">
+        <span class="span-profile-pic">
+            <img src="{{ url_for('static' ,filename='images/' + post.author.image_file) }}" alt="" class="profile-pic">
+        </span>
+        <div class="span-flex">
+            <span class="user-name">
+                {{ post.author.username }}
+            </span>.
+            <span class="date-posted">
+                {{ post.date_posted.strftime('%b %d, %Y') }}
+            </span>
+            {% if (current_user == post.author) %}
+                <div  class="update-btns">
+                    <a class="btn" href="{{ url_for('posts.update_post', post_id=post.id) }}">Update</a>
+                    <a class="btn dlt-btn" href="{{ url_for('posts.delete_post', post_id=post.id)}}">Delete</a>
+                </div>
+            {% endif %}
+            <p class="post-content">
+                {{ post.content }}
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

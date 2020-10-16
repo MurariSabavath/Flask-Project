@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="login-form">
+    <div class="login-form-div">
+        <h2>New Post</h2>
+
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+        
+            {{ form.content(class="form-input new-post") }} <br>
+            <div class="form-errors">
+                {% if form.content.errors %}
+                    {% for error in form.content.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        
+            {{ form.submit(class="submit-btn") }}
+        </form>
+    </div>
+</div>
+{% endblock %}
