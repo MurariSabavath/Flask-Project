@@ -1,1 +1,1 @@
-<h2 style="text-align: center;">Flask Movie App</h2>
+<h2 style="text-align: center;">Flask Project</h2>
