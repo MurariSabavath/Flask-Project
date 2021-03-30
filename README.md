@@ -1,7 +1,1 @@
-# Flask App
-
-Download the twitter_clone.
-
-Open terminal/cmd then run "run.py" file.
-
-Open the browser open localhost with port 5000.
+<h2 style="text-align: center;">Flask Movie App</h2>
